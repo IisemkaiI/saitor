@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Ваш профиль</h1>
+<p>Здравствуйте, {{ request.user.get_username }}. Всего у вас <strong>{{ request.user.orders.count }}</strong> заказов.</p>
+<p>Ваши заказы: <a href="{% url 'users:user_orders' %}">Перейти к заказам</a></p>
+
+<p>Если вы хотите выйти из системы:
+    <form action="{% url 'users:logout' %}" method="post" style="display: inline; margin: 0; padding: 0;">
+        {% csrf_token %}
+        <button type="submit" style="background: none; border: none; padding: 0; color: #585858; text-decoration: underline; font: inherit; cursor: pointer; transition: color 0.2s ease;">
+            Выйти
+        </button>
+    </form>
+</p>
+
+<p>Если вы хотите сменить пароль: <a href="{% url 'users:password_change' %}">Сменить пароль</a></p>
+{% endblock %}
